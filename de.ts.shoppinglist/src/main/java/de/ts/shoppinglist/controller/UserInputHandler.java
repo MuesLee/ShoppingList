@@ -8,10 +8,6 @@ public interface UserInputHandler {
 	
 	public void removeCurrentlySelectedEntriesFromShoppingList();
 
-	public void moveCurrentlySelectedEntryDownwards();
-
-	public void moveCurrentlySelectedEntryUpwards();
-
 	public void editCurrentlySelectedItem();
 	
 }

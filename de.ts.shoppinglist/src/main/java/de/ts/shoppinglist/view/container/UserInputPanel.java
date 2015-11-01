@@ -58,7 +58,7 @@ public class UserInputPanel extends JPanel {
 
 	private void initComponents() {
 		this.buttonPanel = createButtonPanel();
-		this.userInputLabel = new JLabel("Neuen Eintrag erfassen:");
+		this.userInputLabel = new JLabel(Messages.getString("UserInputPanel.LabelTextCreateNewEntry")); //$NON-NLS-1$
 		this.userInputLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		shoppingListEntryComponent = new ShoppingListEntryComponent(null);
 	}
@@ -74,8 +74,8 @@ public class UserInputPanel extends JPanel {
 		// Pressing Enter will add the ShoppingItem
 
 		getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, false),
-				"Enter pressed");
-		getActionMap().put("Enter pressed", new AbstractAction() {
+				"Enter pressed"); //$NON-NLS-1$
+		getActionMap().put("Enter pressed", new AbstractAction() { //$NON-NLS-1$
 			private static final long serialVersionUID = 1L;
 
 			@Override
@@ -86,8 +86,8 @@ public class UserInputPanel extends JPanel {
 		// Pressing Delete will remove the ShoppingItem
 
 		getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0, false),
-				"Delete pressed");
-		getActionMap().put("Delete pressed", new AbstractAction() {
+				"Delete pressed"); //$NON-NLS-1$
+		getActionMap().put("Delete pressed", new AbstractAction() { //$NON-NLS-1$
 			private static final long serialVersionUID = 1L;
 
 			@Override
@@ -98,8 +98,8 @@ public class UserInputPanel extends JPanel {
 		// Pressing F2 will Edit the ShoppingItem
 		
 		getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_F2, 0, false),
-				"F2 pressed");
-		getActionMap().put("F2 pressed", new AbstractAction() {
+				"F2 pressed"); //$NON-NLS-1$
+		getActionMap().put("F2 pressed", new AbstractAction() { //$NON-NLS-1$
 			private static final long serialVersionUID = 1L;
 			
 			@Override
@@ -114,8 +114,8 @@ public class UserInputPanel extends JPanel {
 
 		buttonPanel.setLayout(new FlowLayout());
 
-		this.addItemToListButton = new JButton("hinzufügen");
-		this.removeItemFromListButton = new JButton("entfernen");
+		this.addItemToListButton = new JButton(Messages.getString("UserInputPanel.ButtonTextAdd")); //$NON-NLS-1$
+		this.removeItemFromListButton = new JButton(Messages.getString("UserInputPanel.ButtonTextRemove")); //$NON-NLS-1$
 
 		addItemToListButton.addActionListener(new ActionListener() {
 			@Override
@@ -157,4 +157,5 @@ public class UserInputPanel extends JPanel {
 	controller.editCurrentlySelectedItem();
 		
 	}
+	
 }

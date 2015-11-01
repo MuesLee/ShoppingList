@@ -115,24 +115,8 @@ public class ShoppingListController implements PropertyChangeListener, UserInput
 	}
 
 	@Override
-	public void moveCurrentlySelectedEntryDownwards() {
-		List<ShoppingListEntry> selectedShoppingListEntries = shoppingListGUI.getSelectedShoppingListEntries();
-		for (ShoppingListEntry shoppingListEntry : selectedShoppingListEntries) {
-
-			int currentIndex = shoppingListModel.indexOf(shoppingListEntry);
-			int desiredIndex =  Math.max(currentIndex-1, 0);
-			
-			shoppingListModel.set(desiredIndex, shoppingListEntry);
-		}
-	}
-
-	@Override
-	public void moveCurrentlySelectedEntryUpwards() {
-		
-	}
-
-	@Override
 	public void editCurrentlySelectedItem() {
+		log.info("ListEditPopup requested");
 		new ListEditPopup(shoppingListGUI.getJList());
 	}
 
