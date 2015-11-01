@@ -12,21 +12,37 @@ import de.ts.shoppinglist.util.ShoppingListEntryUtil;
 
 public class ShoppingListEntryUtilTest {
 
-	@Test
-	public void testparseStringToShoppingListEntry() throws Exception {
 
-		String shoppingItemString = "Test";
+	@Test
+	public void testparsePieceStringToShoppingListEntry() throws Exception {
+		
+		String shoppingItemString = "Test ";
 		int shoppingItemQuantity = 1;
 		ShoppingItemUnit itemUnit = ShoppingItemUnit.PIECE;
 		
 		String given = shoppingItemQuantity	+ itemUnit.toString() + " " + shoppingItemString;
 		ShoppingListEntry actual = ShoppingListEntryUtil.parseStringToShoppingListEntry(given);
-
+		
 		ShoppingItem expectedShoppingItem = new ShoppingItem(shoppingItemString);
 		ShoppingItemQuantity expectedShoppingItemQuantity = new ShoppingItemQuantity(shoppingItemQuantity, itemUnit);
-
+		
 		assertEquals(expectedShoppingItem, actual.getItem());
 		assertEquals(expectedShoppingItemQuantity, actual.getQuantity());
 	}
-
+	@Test
+	public void testparseGrammStringToShoppingListEntry() throws Exception {
+		
+		String shoppingItemString = " Test";
+		int shoppingItemQuantity = 12313;
+		ShoppingItemUnit itemUnit = ShoppingItemUnit.GRAMM;
+		
+		String given = shoppingItemQuantity	+ itemUnit.toString() + " " + shoppingItemString;
+		ShoppingListEntry actual = ShoppingListEntryUtil.parseStringToShoppingListEntry(given);
+		
+		ShoppingItem expectedShoppingItem = new ShoppingItem(shoppingItemString);
+		ShoppingItemQuantity expectedShoppingItemQuantity = new ShoppingItemQuantity(shoppingItemQuantity, itemUnit);
+		
+		assertEquals(expectedShoppingItem, actual.getItem());
+		assertEquals(expectedShoppingItemQuantity, actual.getQuantity());
+	}
 }

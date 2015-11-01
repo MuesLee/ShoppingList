@@ -15,7 +15,7 @@ public class ShoppingListEntryUtil {
 	 * Format: [String representation of {@link ShoppingItemQuantity}
 	 * ][SPACE][String representation of {@link ShoppingItem}]
 	 * 
-	 * Uses the first given String representation of {@link ShoppingItemUnit}
+	 * Uses the first correctly matched String representation of {@link ShoppingItemUnit} to determine the end of the string representation of {@link ShoppingItemQuantity}
 	 * 
 	 * @param value
 	 *            String to be parsed
@@ -28,10 +28,10 @@ public class ShoppingListEntryUtil {
 			throw new ParseException(value, 0);
 		}
 
-		try {
-			ShoppingItemUnit[] values = ShoppingItemUnit.values();
+		ShoppingItemUnit[] values = ShoppingItemUnit.values();
 
-			for (ShoppingItemUnit shoppingItemUnit : values) {
+		for (ShoppingItemUnit shoppingItemUnit : values) {
+			try {
 
 				String unitText = shoppingItemUnit.toString() + ShoppingListEntry.QUANTITY_TO_ITEM_DIVIDER;
 
@@ -50,12 +50,10 @@ public class ShoppingListEntryUtil {
 				ShoppingItemQuantity shoppingItemQuantity = new ShoppingItemQuantity(quantity, shoppingItemUnit);
 
 				return new ShoppingListEntry(shoppingItem, shoppingItemQuantity);
+			} catch (Exception e) {
 			}
-
-		} catch (Exception e) {
-			throw new ParseException(value, 0);
 		}
-		
+
 		throw new ParseException(value, 0);
 
 	}

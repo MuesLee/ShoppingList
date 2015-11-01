@@ -8,6 +8,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.List;
 
+import javax.swing.DropMode;
 import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -15,12 +16,16 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import de.ts.shoppinglist.model.ShoppingItem;
 import de.ts.shoppinglist.model.ShoppingItemQuantity;
 import de.ts.shoppinglist.model.ShoppingItemUnit;
 import de.ts.shoppinglist.model.ShoppingListEntry;
 import de.ts.shoppinglist.model.ShoppingListModel;
 import de.ts.shoppinglist.view.components.ListEditPopup;
+import de.ts.shoppinglist.view.components.ListTransferHandler;
 import de.ts.shoppinglist.view.components.ShoppingListEntryRenderer;
 import de.ts.shoppinglist.view.container.ShoppingListFrame;
 import de.ts.shoppinglist.view.container.ShoppingListGUI;
@@ -29,6 +34,8 @@ import de.ts.shoppinglist.view.container.UserInputPanel;
 
 public class ShoppingListController implements PropertyChangeListener, UserInputHandler {
 
+	private static final Logger log = LoggerFactory.getLogger(ShoppingListController.class);
+	
 	public static String _PROPERTY_LIST_INTERVAL_ADDED = "_PROPERTY_LIST_INTERVAL_ADDED";
 	public static String _PROPERTY_LIST_INTERVAL_REMOVED = "_PROPERTY_LIST_INTERVAL_REMOVED";
 	public static String _PROPERTY_LIST_DATA_CHANGED = "_PROPERTY_LIST_DATA_CHANGED";
@@ -71,7 +78,7 @@ public class ShoppingListController implements PropertyChangeListener, UserInput
 	 */
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-
+		
 		if (evt.getSource() == shoppingListModel) {
 			mainFrame.pack();
 		}
@@ -162,13 +169,20 @@ public class ShoppingListController implements PropertyChangeListener, UserInput
 		shoppingList.setLayoutOrientation(JList.VERTICAL);
 		shoppingList.setCellRenderer(new ShoppingListEntryRenderer());
 		shoppingList.setDragEnabled(true);
-		//shoppingList.setTransferHandler(new ListTransferHandler());
+		shoppingList.setDropMode(DropMode.INSERT);
+		shoppingList.setTransferHandler(new ListTransferHandler());
 		shoppingList.addMouseListener(createMouseListener());
 		
 		// TEST ENTRIES
-		ShoppingListEntry shoppingListEntry = new ShoppingListEntry(new ShoppingItem("Test"),
+		ShoppingListEntry shoppingListEntry = new ShoppingListEntry(new ShoppingItem("Brötchen"),
 				new ShoppingItemQuantity(2, ShoppingItemUnit.PIECE));
 		shoppingListModel.addElement(shoppingListEntry);
+		ShoppingListEntry shoppingListEntry2 = new ShoppingListEntry(new ShoppingItem("Salami"),
+				new ShoppingItemQuantity(2, ShoppingItemUnit.GRAMM));
+		shoppingListModel.addElement(shoppingListEntry2);
+		ShoppingListEntry shoppingListEntry3 = new ShoppingListEntry(new ShoppingItem("Parmesan"),
+				new ShoppingItemQuantity(2123, ShoppingItemUnit.GRAMM));
+		shoppingListModel.addElement(shoppingListEntry3);
 
 		return shoppingList;
 	}
