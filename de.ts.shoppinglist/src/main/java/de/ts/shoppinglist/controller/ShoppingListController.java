@@ -1,12 +1,15 @@
 package de.ts.shoppinglist.controller;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.swing.DropMode;
 import javax.swing.JList;
@@ -15,9 +18,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import de.ts.shoppinglist.model.ShoppingItem;
 import de.ts.shoppinglist.model.ShoppingItemQuantity;
@@ -34,11 +34,11 @@ import de.ts.shoppinglist.view.container.UserInputPanel;
 
 public class ShoppingListController implements PropertyChangeListener, UserInputHandler {
 
-	private static final Logger log = LoggerFactory.getLogger(ShoppingListController.class);
+	private static final Logger log = Logger.getLogger("ShoppingListController"); //$NON-NLS-1$
 	
-	public static String _PROPERTY_LIST_INTERVAL_ADDED = "_PROPERTY_LIST_INTERVAL_ADDED";
-	public static String _PROPERTY_LIST_INTERVAL_REMOVED = "_PROPERTY_LIST_INTERVAL_REMOVED";
-	public static String _PROPERTY_LIST_DATA_CHANGED = "_PROPERTY_LIST_DATA_CHANGED";
+	public static String _PROPERTY_LIST_INTERVAL_ADDED = "_PROPERTY_LIST_INTERVAL_ADDED"; //$NON-NLS-1$
+	public static String _PROPERTY_LIST_INTERVAL_REMOVED = "_PROPERTY_LIST_INTERVAL_REMOVED"; //$NON-NLS-1$
+	public static String _PROPERTY_LIST_DATA_CHANGED = "_PROPERTY_LIST_DATA_CHANGED"; //$NON-NLS-1$
 
 	private static long lastUsedID = 0L;
 
@@ -174,13 +174,13 @@ public class ShoppingListController implements PropertyChangeListener, UserInput
 		shoppingList.addMouseListener(createMouseListener());
 		
 		// TEST ENTRIES
-		ShoppingListEntry shoppingListEntry = new ShoppingListEntry(new ShoppingItem("Brötchen"),
+		ShoppingListEntry shoppingListEntry = new ShoppingListEntry(new ShoppingItem("Brötchen"), //$NON-NLS-1$
 				new ShoppingItemQuantity(2, ShoppingItemUnit.PIECE));
 		shoppingListModel.addElement(shoppingListEntry);
-		ShoppingListEntry shoppingListEntry2 = new ShoppingListEntry(new ShoppingItem("Salami"),
+		ShoppingListEntry shoppingListEntry2 = new ShoppingListEntry(new ShoppingItem("Salami"), //$NON-NLS-1$
 				new ShoppingItemQuantity(2, ShoppingItemUnit.GRAMM));
 		shoppingListModel.addElement(shoppingListEntry2);
-		ShoppingListEntry shoppingListEntry3 = new ShoppingListEntry(new ShoppingItem("Parmesan"),
+		ShoppingListEntry shoppingListEntry3 = new ShoppingListEntry(new ShoppingItem("Parmesan"), //$NON-NLS-1$
 				new ShoppingItemQuantity(2123, ShoppingItemUnit.GRAMM));
 		shoppingListModel.addElement(shoppingListEntry3);
 
@@ -222,13 +222,20 @@ public class ShoppingListController implements PropertyChangeListener, UserInput
 	private JMenuBar createJMenuBar() {
 
 		JMenuBar menuBar = new JMenuBar();
-		JMenu menu = new JMenu("Menü");
-		JMenuItem menuItemExit = new JMenuItem("Beenden");
-
+		JMenu menu = new JMenu(Messages.getString("ShoppingListController.Menu")); //$NON-NLS-1$
+		JMenuItem menuItemExit = new JMenuItem(Messages.getString("ShoppingListController.Exit")); //$NON-NLS-1$
+		menuItemExit.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		
 		menuBar.add(menu);
 		menu.add(menuItemExit);
 
 		return menuBar;
 	}
+	
 
 }

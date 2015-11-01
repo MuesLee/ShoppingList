@@ -29,7 +29,7 @@ public class ShoppingListPanel extends JPanel implements ShoppingListGUI {
 	}
 
 	private void initComponents() {
-		shoppingListLabel = new JLabel("Meine Einkaufsliste:");
+		shoppingListLabel = new JLabel(Messages.getString("ShoppingListPanel.MyShoppingListLabel")); //$NON-NLS-1$
 		shoppingListLabel.setHorizontalAlignment(SwingConstants.CENTER);
 	}
 

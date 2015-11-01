@@ -29,6 +29,8 @@ public class ShoppingListFrame extends JFrame {
 		setLayout(new BorderLayout());
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		
+		setTitle(Messages.getString("ShoppingListFrame.FrameTitle")); //$NON-NLS-1$
 	}
+	
+	
 }
