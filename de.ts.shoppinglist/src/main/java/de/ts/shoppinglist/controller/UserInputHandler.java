@@ -7,5 +7,9 @@ public interface UserInputHandler {
 	public void addShoppingItemToShoppingList(ShoppingListEntry shoppingListEntry);
 	
 	public void removeCurrentlySelectedEntriesFromShoppingList();
+
+	public void moveCurrentlySelectedEntryDownwards();
+
+	public void moveCurrentlySelectedEntryUpwards();
 	
 }
