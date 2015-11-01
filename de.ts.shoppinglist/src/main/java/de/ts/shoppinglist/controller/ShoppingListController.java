@@ -139,7 +139,7 @@ public class ShoppingListController implements PropertyChangeListener, UserInput
 		shoppingList.setLayoutOrientation(JList.VERTICAL);
 		shoppingList.setCellRenderer(new ShoppingListEntryRenderer());
 		shoppingList.setDragEnabled(true);
-		shoppingList.setTransferHandler(new ListTransferHandler());
+		//shoppingList.setTransferHandler(new ListTransferHandler());
 		shoppingList.addMouseListener(createMouseListener());
 		
 		// TEST ENTRIES

@@ -1,8 +1,13 @@
-package de.ts.shoppinglist.model;
+package de.ts.shoppinglist.util;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import de.ts.shoppinglist.model.ShoppingItem;
+import de.ts.shoppinglist.model.ShoppingItemQuantity;
+import de.ts.shoppinglist.model.ShoppingListEntry;
+import de.ts.shoppinglist.util.ShoppingListEntryUtil;
 
 public class ShoppingListEntryUtilTest {
 

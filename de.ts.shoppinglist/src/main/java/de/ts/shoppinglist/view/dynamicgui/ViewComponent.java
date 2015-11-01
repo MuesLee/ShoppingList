@@ -6,6 +6,8 @@ import java.lang.reflect.Field;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 
+import de.ts.shoppinglist.util.ViewUtil;
+
 /**
  * A {@link JComponent}, specialized to display with {@link View} annotated fields as Swing-Components.
  * 

@@ -1,6 +1,10 @@
-package de.ts.shoppinglist.model;
+package de.ts.shoppinglist.util;
 
 import java.text.ParseException;
+
+import de.ts.shoppinglist.model.ShoppingItem;
+import de.ts.shoppinglist.model.ShoppingItemQuantity;
+import de.ts.shoppinglist.model.ShoppingListEntry;
 
 public class ShoppingListEntryUtil {
 

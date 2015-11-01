@@ -1,4 +1,4 @@
-package de.ts.shoppinglist.view.dynamicgui;
+package de.ts.shoppinglist.util;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -7,6 +7,8 @@ import java.util.Locale;
 import javax.swing.JComponent;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
+
+import de.ts.shoppinglist.view.dynamicgui.ContentType;
 
 /**
  * Offers utility methods for the view

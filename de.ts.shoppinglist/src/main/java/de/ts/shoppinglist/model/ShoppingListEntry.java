@@ -13,7 +13,7 @@ import java.io.IOException;
  **/
 public class ShoppingListEntry extends Entity implements Transferable{
 
-	static final String QUANTITY_TIMES_SHOPPING_ENTRY_STRING = " x ";
+	public static final String QUANTITY_TIMES_SHOPPING_ENTRY_STRING = " x ";
 	
 	private ShoppingItem item;
 

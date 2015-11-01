@@ -16,7 +16,7 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 import de.ts.shoppinglist.model.ShoppingListEntry;
-import de.ts.shoppinglist.model.ShoppingListEntryUtil;
+import de.ts.shoppinglist.util.ShoppingListEntryUtil;
 
 public class ListEditPopup extends JPopupMenu {
 
