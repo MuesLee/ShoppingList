@@ -50,9 +50,9 @@ public class UserInputPanel extends JPanel {
 	private void configure() {
 		LayoutManager layoutManager = new BorderLayout();
 		setLayout(layoutManager);
-		
+
 		addKeyBinding();
-		
+
 		setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
 	}
 
@@ -70,19 +70,32 @@ public class UserInputPanel extends JPanel {
 	}
 
 	private void addKeyBinding() {
-		
-		//Pressing Enter will add the ShoppingItem
-		
-		getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
-				KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, false), "Enter pressed");
+
+		// Pressing Enter will add the ShoppingItem
+
+		getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, false),
+				"Enter pressed");
 		getActionMap().put("Enter pressed", new AbstractAction() {
 			private static final long serialVersionUID = 1L;
+
 			@Override
 			public void actionPerformed(ActionEvent ae) {
 				addShoppingItemToShoppingList();
 			}
 		});
-		
+		// Pressing Delete will remove the ShoppingItem
+
+		getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0, false),
+				"Delete pressed");
+		getActionMap().put("Delete pressed", new AbstractAction() {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void actionPerformed(ActionEvent ae) {
+				removeItemsFromShoppingList();
+			}
+		});
+
 	}
 
 	private JPanel createButtonPanel() {
@@ -104,7 +117,7 @@ public class UserInputPanel extends JPanel {
 		removeItemFromListButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				controller.removeCurrentlySelectedEntriesFromShoppingList();
+				removeItemsFromShoppingList();
 			}
 		});
 
@@ -120,9 +133,13 @@ public class UserInputPanel extends JPanel {
 		return shoppingListEntry;
 
 	}
-	
+
 	private void addShoppingItemToShoppingList() {
 		ShoppingListEntry shoppingListEntry = createShoppingItemFromUserInput();
 		controller.addShoppingItemToShoppingList(shoppingListEntry);
+	}
+
+	private void removeItemsFromShoppingList() {
+		controller.removeCurrentlySelectedEntriesFromShoppingList();
 	}
 }
