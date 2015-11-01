@@ -11,7 +11,7 @@ public class ShoppingListEntryUtilTest {
 
 		String shoppingItemString = "Test";
 		int shoppingItemQuantity = 1;
-		String given = shoppingItemQuantity + ShoppingListEntryUtil.QUANTITY_TIMES_SHOPPING_ENTRY_STRING
+		String given = shoppingItemQuantity + ShoppingListEntry.QUANTITY_TIMES_SHOPPING_ENTRY_STRING
 				+ shoppingItemString;
 		ShoppingListEntry actual = ShoppingListEntryUtil.parseStringToShoppingListEntry(given);
 

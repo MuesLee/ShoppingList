@@ -1,17 +1,20 @@
 package de.ts.shoppinglist.model;
 
+import java.text.ParseException;
+
 public class ShoppingListEntryUtil {
 
 	
-	static final String QUANTITY_TIMES_SHOPPING_ENTRY_STRING = " x ";
-
-	public static ShoppingListEntry parseStringToShoppingListEntry(String value)
+	public static ShoppingListEntry parseStringToShoppingListEntry(String value) throws ParseException
 	{
+		try {
+			
+		String quantityTimesShoppingEntryString = ShoppingListEntry.QUANTITY_TIMES_SHOPPING_ENTRY_STRING;
+		
 		int startOfQuantity = 0;
-		int endOfQuantity = value.indexOf(QUANTITY_TIMES_SHOPPING_ENTRY_STRING);
-		
-		
-		int startOfItem = endOfQuantity+QUANTITY_TIMES_SHOPPING_ENTRY_STRING.length();
+		int endOfQuantity = value.indexOf(quantityTimesShoppingEntryString);
+				
+		int startOfItem = endOfQuantity+quantityTimesShoppingEntryString.length();
 		int endOfItem = value.length();
 		
 		String itemQuantity = value.substring(startOfQuantity, endOfQuantity);
@@ -24,6 +27,9 @@ public class ShoppingListEntryUtil {
 		
 		
 		return new ShoppingListEntry(shoppingItem, shoppingItemQuantity);
+		} catch (Exception e) {
+			throw new ParseException(value, 0);
+		}
 		
 	}
 }

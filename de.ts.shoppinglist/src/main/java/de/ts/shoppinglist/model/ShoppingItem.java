@@ -64,6 +64,10 @@ public class ShoppingItem{
 		return true;
 	}
 	
+	@Override
+	public String toString() {
+		return name;
+	}
 	
 
 }

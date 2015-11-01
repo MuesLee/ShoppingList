@@ -39,6 +39,10 @@ public class ShoppingItemQuantity{
 		return true;
 	}
 	
+	@Override
+	public String toString() {
+		return Integer.toString(quantity);
+	}
 	
 	
 }
