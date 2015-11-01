@@ -6,6 +6,7 @@ import javax.swing.JComponent;
 import javax.swing.JTextField;
 
 import de.ts.shoppinglist.model.ShoppingItem;
+import de.ts.shoppinglist.util.Messages;
 
 public class ShoppingItemComponent extends JComponent {
 
@@ -16,7 +17,7 @@ public class ShoppingItemComponent extends JComponent {
 	public ShoppingItemComponent(ShoppingItem item) {
 		super();
 		configure();
-		initFields(item);
+		initComponents(item);
 		
 		setVisible(true);
 	}
@@ -26,8 +27,9 @@ public class ShoppingItemComponent extends JComponent {
 		setLayout(new FlowLayout());
 	}
 
-	private void initFields(ShoppingItem item) {
+	private void initComponents(ShoppingItem item) {
 		itemName = new JTextField(25);
+		itemName.setToolTipText(Messages.getString("ShoppingItemComponent.ToolTipItemName")); //$NON-NLS-1$
 
 		if (item != null) {
 			itemName.setText(item.getName());

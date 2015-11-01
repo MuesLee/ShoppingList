@@ -2,7 +2,7 @@ package de.ts.shoppinglist.model;
 
 public enum ShoppingItemUnit {
 
-	PIECE(" x"), GRAMM("g");
+	PIECE(" x"), GRAMM("g"), KILOGRAMM("kg");
 	
 	private String unitText;
 

@@ -166,7 +166,7 @@ public class ShoppingListController implements PropertyChangeListener, UserInput
 				new ShoppingItemQuantity(2, ShoppingItemUnit.PIECE));
 		shoppingListModel.addElement(shoppingListEntry);
 		ShoppingListEntry shoppingListEntry2 = new ShoppingListEntry(new ShoppingItem("Salami"), //$NON-NLS-1$
-				new ShoppingItemQuantity(2, ShoppingItemUnit.GRAMM));
+				new ShoppingItemQuantity(2, ShoppingItemUnit.KILOGRAMM));
 		shoppingListModel.addElement(shoppingListEntry2);
 		ShoppingListEntry shoppingListEntry3 = new ShoppingListEntry(new ShoppingItem("Parmesan"), //$NON-NLS-1$
 				new ShoppingItemQuantity(2123, ShoppingItemUnit.GRAMM));

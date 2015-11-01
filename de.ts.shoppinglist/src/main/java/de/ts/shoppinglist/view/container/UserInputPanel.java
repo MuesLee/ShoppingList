@@ -116,8 +116,10 @@ public class UserInputPanel extends JPanel {
 		buttonPanel.setLayout(new FlowLayout());
 
 		this.addItemToListButton = new JButton(Messages.getString("UserInputPanel.ButtonTextAdd")); //$NON-NLS-1$
+		addItemToListButton.setToolTipText(Messages.getString("UserInputPanel.ToolTipButtonAdd")); //$NON-NLS-1$
 		this.removeItemFromListButton = new JButton(Messages.getString("UserInputPanel.ButtonTextRemove")); //$NON-NLS-1$
-
+		removeItemFromListButton.setToolTipText(Messages.getString("UserInputPanel.ToolTipButtonRemove")); //$NON-NLS-1$
+		
 		addItemToListButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

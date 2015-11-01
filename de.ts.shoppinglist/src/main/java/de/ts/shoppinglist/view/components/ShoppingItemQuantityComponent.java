@@ -8,6 +8,7 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
 import de.ts.shoppinglist.model.ShoppingItemUnit;
+import de.ts.shoppinglist.util.Messages;
 
 public class ShoppingItemQuantityComponent extends JComponent {
 
@@ -46,6 +47,7 @@ public class ShoppingItemQuantityComponent extends JComponent {
 	private JComboBox<ShoppingItemUnit> createShoppingItemUnitComponent() {
 		
 		JComboBox<ShoppingItemUnit> shoppingItemUnitComponent = new JComboBox<>(ShoppingItemUnit.values());
+		shoppingItemUnitComponent.setToolTipText(Messages.getString("ShoppingItemQuantityComponent.ToolTipShoppingItemQuantityUnit")); //$NON-NLS-1$
 		
 		return shoppingItemUnitComponent;
 	}
@@ -53,9 +55,10 @@ public class ShoppingItemQuantityComponent extends JComponent {
 
 	private JSpinner createNumbersOnlyComponent(int length) {
 		
-		JSpinner spinner = new JSpinner(new SpinnerNumberModel(1, 1, 999999, 1));
-
-		return spinner;
+		JSpinner shoppingItemQuantityComponent = new JSpinner(new SpinnerNumberModel(1, 1, 999999, 1));
+		shoppingItemQuantityComponent.setToolTipText(Messages.getString("ShoppingItemQuantityComponent.ToolTipShoppingItemQuantity")); //$NON-NLS-1$
+		
+		return shoppingItemQuantityComponent;
 	}
 	
 	public void setItemQuantity(int value)

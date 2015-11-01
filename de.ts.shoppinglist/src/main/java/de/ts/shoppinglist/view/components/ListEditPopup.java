@@ -36,11 +36,16 @@ public class ListEditPopup extends JPopupMenu {
 		
 		add(editTextField);
 		
+		showPopup(list);
+		
+	}
+
+	private void showPopup(final JList<ShoppingListEntry> list) {
 		int row = list.getSelectedIndex();
 		Rectangle r = list.getCellBounds(row, row);
 		setPreferredSize(new Dimension(r.width, r.height));
 		show(list, r.x, r.y);
-		
+		editTextField.requestFocusInWindow();
 	}
 
 	private void configure() {
@@ -68,7 +73,6 @@ public class ListEditPopup extends JPopupMenu {
 		editTextField.setText(list.getSelectedValue().toString());
 		editTextField.selectAll();
 		editTextField.setHorizontalAlignment(SwingConstants.CENTER);
-		editTextField.requestFocusInWindow();
 	}
 
 	private void applyValueToModel(String value, DefaultListModel<ShoppingListEntry> model, int row) {
