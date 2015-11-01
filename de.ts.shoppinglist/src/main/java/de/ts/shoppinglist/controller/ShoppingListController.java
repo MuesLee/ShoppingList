@@ -79,7 +79,11 @@ public class ShoppingListController implements PropertyChangeListener, UserInput
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		
+		log.info("PropertyChange received");
 		if (evt.getSource() == shoppingListModel) {
+			
+			log.info("ShoppingListModel changed. Packing mainFrame");
+			
 			mainFrame.pack();
 		}
 
@@ -94,6 +98,8 @@ public class ShoppingListController implements PropertyChangeListener, UserInput
 	 */
 	public void addShoppingItemToShoppingList(ShoppingListEntry shoppingListEntry) {
 		if (shoppingListEntry != null && shoppingListEntry.isValid()) {
+			
+			log.info("Add of entry " + shoppingListEntry + " requested");
 			shoppingListModel.addElement(shoppingListEntry);
 		}
 	}
@@ -108,12 +114,17 @@ public class ShoppingListController implements PropertyChangeListener, UserInput
 		List<ShoppingListEntry> selectedShoppingListEntries = shoppingListGUI.getSelectedShoppingListEntries();
 
 		for (ShoppingListEntry shoppingListEntry : selectedShoppingListEntries) {
-
+			
+			log.info("Remove of entry " + shoppingListEntry + " requested");
 			shoppingListModel.removeElement(shoppingListEntry);
+			
 		}
 
 	}
 
+	/**
+	 * Opens a {@link ListEditPopup} to edit the currently selected shoppinglist entry
+	 */
 	@Override
 	public void editCurrentlySelectedItem() {
 		log.info("ListEditPopup requested");
@@ -198,7 +209,7 @@ public class ShoppingListController implements PropertyChangeListener, UserInput
 
 	/**
 	 * Creates a JMenuBar with JMenuItems: <br>
-	 * Menu ->
+	 * Menu -> Exit
 	 * 
 	 * @return
 	 */

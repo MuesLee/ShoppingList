@@ -1,6 +1,7 @@
 package de.ts.shoppinglist.util;
 
 import java.text.ParseException;
+import java.util.logging.Logger;
 
 import de.ts.shoppinglist.model.ShoppingItem;
 import de.ts.shoppinglist.model.ShoppingItemQuantity;
@@ -9,6 +10,8 @@ import de.ts.shoppinglist.model.ShoppingListEntry;
 
 public class ShoppingListEntryUtil {
 
+	private static Logger log = Logger.getLogger("ShoppingListEntryUtil");
+	
 	/**
 	 * Returns {@link ShoppingListEntry} containing the information of the given
 	 * String; <br>
@@ -25,6 +28,7 @@ public class ShoppingListEntryUtil {
 	 */
 	public static ShoppingListEntry parseStringToShoppingListEntry(String value) throws ParseException {
 		if (value == null || value.isEmpty()) {
+			log.warning("ShoppingListEntry parsing failed for: " + value);
 			throw new ParseException(value, 0);
 		}
 
@@ -54,6 +58,7 @@ public class ShoppingListEntryUtil {
 			}
 		}
 
+		log.warning("ShoppingListEntry parsing failed for: " + value);
 		throw new ParseException(value, 0);
 
 	}

@@ -2,6 +2,7 @@ package de.ts.shoppinglist.model;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.logging.Logger;
 
 import javax.swing.DefaultListModel;
 import javax.swing.event.ListDataEvent;
@@ -17,6 +18,8 @@ import de.ts.shoppinglist.controller.ShoppingListController;
  */
 public class ShoppingListModel extends DefaultListModel<ShoppingListEntry>{
 
+	private static Logger log = Logger.getLogger("ShoppingListModel");
+	
 	private static final long serialVersionUID = 1L;
 
 	protected SwingPropertyChangeSupport propertyChangeSupport;
@@ -40,16 +43,19 @@ public class ShoppingListModel extends DefaultListModel<ShoppingListEntry>{
 			
 			@Override
 			public void intervalRemoved(ListDataEvent e) {
+				log.info("interval removed from model");
 				firePropertyChange(ShoppingListController._PROPERTY_LIST_INTERVAL_REMOVED, e.getIndex0(), null);
 			}
 			
 			@Override
 			public void intervalAdded(ListDataEvent e) {
+				log.info("interval added to model");
 				firePropertyChange(ShoppingListController._PROPERTY_LIST_INTERVAL_ADDED, null, e.getIndex0());
 			}
 			
 			@Override
 			public void contentsChanged(ListDataEvent e) {
+				log.info("model contents changed");
 				firePropertyChange(ShoppingListController._PROPERTY_LIST_DATA_CHANGED, null, null);
 			}
 		};

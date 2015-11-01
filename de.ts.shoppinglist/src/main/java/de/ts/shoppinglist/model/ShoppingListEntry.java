@@ -57,7 +57,7 @@ public class ShoppingListEntry extends Entity implements Transferable{
 		}
 		if(!item.isValid() || !quantity.isValid())
 		{
-			return true;
+			return false;
 		}
 		
 		return true;
