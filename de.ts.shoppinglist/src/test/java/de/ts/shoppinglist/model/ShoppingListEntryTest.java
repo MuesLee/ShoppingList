@@ -14,7 +14,7 @@ public class ShoppingListEntryTest {
 	@Before
 	public void setup() {
 		this.item = new ShoppingItem("Test");
-		this.shoppingQuantity = new ShoppingItemQuantity(1);
+		this.shoppingQuantity = new ShoppingItemQuantity(1, ShoppingItemUnit.PIECE);
 		this.classUnderTest = new ShoppingListEntry(item, shoppingQuantity);
 	}
 
@@ -69,7 +69,7 @@ public class ShoppingListEntryTest {
 
 		boolean expected = false;
 
-		classUnderTest.setQuantity(new ShoppingItemQuantity(0));
+		classUnderTest.setQuantity(new ShoppingItemQuantity(0, ShoppingItemUnit.PIECE));
 
 		boolean actual = classUnderTest.isValid();
 

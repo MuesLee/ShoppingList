@@ -3,10 +3,13 @@ package de.ts.shoppinglist.model;
 public class ShoppingItemQuantity{
 
 	private int quantity;
+	
+	private ShoppingItemUnit itemUnit;
 
-	public ShoppingItemQuantity(int quantity) {
+	public ShoppingItemQuantity(int quantity, ShoppingItemUnit itemUnit) {
 		super();
 		this.quantity = quantity;
+		this.itemUnit = itemUnit;
 	}
 
 	public int getQuantity() {
@@ -41,7 +44,28 @@ public class ShoppingItemQuantity{
 	
 	@Override
 	public String toString() {
-		return Integer.toString(quantity);
+		return Integer.toString(quantity) + itemUnit.toString();
+	}
+
+	public ShoppingItemUnit getItemUnit() {
+		return itemUnit;
+	}
+
+	public void setItemUnit(ShoppingItemUnit itemUnit) {
+		this.itemUnit = itemUnit;
+	}
+
+	public boolean isValid() {
+		if(quantity <1)
+		{
+			return false;
+		}
+		if(itemUnit == null)
+		{
+			return false;
+		}
+		
+		return true;
 	}
 	
 	

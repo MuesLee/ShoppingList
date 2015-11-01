@@ -17,6 +17,7 @@ import javax.swing.ListSelectionModel;
 
 import de.ts.shoppinglist.model.ShoppingItem;
 import de.ts.shoppinglist.model.ShoppingItemQuantity;
+import de.ts.shoppinglist.model.ShoppingItemUnit;
 import de.ts.shoppinglist.model.ShoppingListEntry;
 import de.ts.shoppinglist.model.ShoppingListModel;
 import de.ts.shoppinglist.view.components.ListEditPopup;
@@ -161,7 +162,7 @@ public class ShoppingListController implements PropertyChangeListener, UserInput
 		
 		// TEST ENTRIES
 		ShoppingListEntry shoppingListEntry = new ShoppingListEntry(new ShoppingItem("Test"),
-				new ShoppingItemQuantity(2));
+				new ShoppingItemQuantity(2, ShoppingItemUnit.PIECE));
 		shoppingListModel.addElement(shoppingListEntry);
 
 		return shoppingList;

@@ -9,15 +9,15 @@ public class ShoppingItem{
 	private String name;
 
 	/**
-	 * Creates a {@link ShoppingItem} out of the given String
+	 * Creates a {@link ShoppingItem} with the given name
 	 * 
-	 * @param value
-	 *            the string representation of the {@link ShoppingItem}
+	 * @param name
+	 *            the name of the {@link ShoppingItem}
 	 */
 
-	public ShoppingItem(String value) {
+	public ShoppingItem(String name) {
 		super();
-		this.setName(value);
+		this.setName(name);
 	}
 
 	/**
@@ -67,6 +67,16 @@ public class ShoppingItem{
 	@Override
 	public String toString() {
 		return name;
+	}
+
+	public boolean isValid() {
+	
+		if(name == null || name.isEmpty())
+		{
+			return false;
+		}
+		
+		return true;
 	}
 	
 

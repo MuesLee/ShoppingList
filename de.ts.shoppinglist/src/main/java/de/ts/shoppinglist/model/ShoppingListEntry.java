@@ -13,8 +13,8 @@ import java.io.IOException;
  **/
 public class ShoppingListEntry extends Entity implements Transferable{
 
-	public static final String QUANTITY_TIMES_SHOPPING_ENTRY_STRING = " x ";
-	
+	public static final String QUANTITY_TO_ITEM_DIVIDER = " ";
+
 	private ShoppingItem item;
 
 	private ShoppingItemQuantity quantity;
@@ -55,14 +55,11 @@ public class ShoppingListEntry extends Entity implements Transferable{
 		{
 			return false;
 		}
-		if(item.getName() == null || item.getName().isEmpty())
+		if(!item.isValid() || !quantity.isValid())
 		{
-			return false;
+			return true;
 		}
-		if(quantity.getQuantity() == 0)
-		{
-			return false;
-		}
+		
 		return true;
 	}
 
@@ -112,7 +109,7 @@ public class ShoppingListEntry extends Entity implements Transferable{
 	
 	@Override
 	public String toString() {
-		return quantity.toString() + QUANTITY_TIMES_SHOPPING_ENTRY_STRING + item.toString();
+		return quantity.toString() + QUANTITY_TO_ITEM_DIVIDER + item.toString();
 	}
 	
 	

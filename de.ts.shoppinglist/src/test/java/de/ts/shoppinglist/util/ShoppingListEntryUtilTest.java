@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import de.ts.shoppinglist.model.ShoppingItem;
 import de.ts.shoppinglist.model.ShoppingItemQuantity;
+import de.ts.shoppinglist.model.ShoppingItemUnit;
 import de.ts.shoppinglist.model.ShoppingListEntry;
 import de.ts.shoppinglist.util.ShoppingListEntryUtil;
 
@@ -16,12 +17,13 @@ public class ShoppingListEntryUtilTest {
 
 		String shoppingItemString = "Test";
 		int shoppingItemQuantity = 1;
-		String given = shoppingItemQuantity + ShoppingListEntry.QUANTITY_TIMES_SHOPPING_ENTRY_STRING
-				+ shoppingItemString;
+		ShoppingItemUnit itemUnit = ShoppingItemUnit.PIECE;
+		
+		String given = shoppingItemQuantity	+ itemUnit.toString() + " " + shoppingItemString;
 		ShoppingListEntry actual = ShoppingListEntryUtil.parseStringToShoppingListEntry(given);
 
 		ShoppingItem expectedShoppingItem = new ShoppingItem(shoppingItemString);
-		ShoppingItemQuantity expectedShoppingItemQuantity = new ShoppingItemQuantity(shoppingItemQuantity);
+		ShoppingItemQuantity expectedShoppingItemQuantity = new ShoppingItemQuantity(shoppingItemQuantity, itemUnit);
 
 		assertEquals(expectedShoppingItem, actual.getItem());
 		assertEquals(expectedShoppingItemQuantity, actual.getQuantity());

@@ -32,10 +32,8 @@ public class ShoppingListEntryRenderer extends DefaultListCellRenderer {
 				cellHasFocus);
 		
 		ShoppingListEntry listEntry = (ShoppingListEntry) value;
-		String shoppingItemName = listEntry.getItem().getName();
-		String quantityString = listEntry.getQuantity().getQuantity() + " x ";
 		
-		setText(quantityString + shoppingItemName);
+		setText(listEntry.toString());
 		setHorizontalAlignment(SwingConstants.CENTER);
 
 		return listCellRendererComponent;

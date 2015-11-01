@@ -2,10 +2,10 @@ package de.ts.shoppinglist.view.components;
 
 import javax.swing.BoxLayout;
 import javax.swing.JComponent;
-import javax.swing.JLabel;
 
 import de.ts.shoppinglist.model.ShoppingItem;
 import de.ts.shoppinglist.model.ShoppingItemQuantity;
+import de.ts.shoppinglist.model.ShoppingItemUnit;
 import de.ts.shoppinglist.model.ShoppingListEntry;
 
 /**
@@ -20,8 +20,6 @@ public class ShoppingListEntryComponent extends JComponent {
 	protected ShoppingItemComponent shoppingItem;
 	protected ShoppingItemQuantityComponent shoppingItemQuantity;
 	
-	private JLabel quantityTimesItemLabel;
-
 	/**
 	 * Creates an instance with initialized components, but without
 	 * {@link ShoppingItem} data
@@ -31,22 +29,14 @@ public class ShoppingListEntryComponent extends JComponent {
 
 		this.shoppingItem = createItemComponent(shoppingListEntry);
 		this.shoppingItemQuantity = createItemQuantityComponent(shoppingListEntry);
-		this.quantityTimesItemLabel = createQuantityTimesItemLabel();
 		
 		configure();
 
 		this.add(shoppingItemQuantity);
-		this.add(quantityTimesItemLabel);
 		this.add(shoppingItem);
 
 		setVisible(true);
 	}
-
-	private JLabel createQuantityTimesItemLabel() {
-		JLabel label = new JLabel("x");
-		return label;
-	}
-
 	private void configure() {
 		setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
 	}
@@ -93,10 +83,11 @@ public class ShoppingListEntryComponent extends JComponent {
 	public ShoppingListEntry getShoppingListEntryRepresentation()
 	{
 		String name = shoppingItem.getShoppingItemName();
-		int quantity = Integer.valueOf(shoppingItemQuantity.getShoppingItemQuantityRepresentation());
+		int quantity = Integer.valueOf(shoppingItemQuantity.getShoppingItemQuantity());
+		ShoppingItemUnit itemUnit = shoppingItemQuantity.getShoppingItemUnit();
 		
 		ShoppingItem shoppingItem = new ShoppingItem(name);
-		ShoppingItemQuantity shoppingQuantity = new ShoppingItemQuantity(quantity);
+		ShoppingItemQuantity shoppingQuantity = new ShoppingItemQuantity(quantity, itemUnit);
 		ShoppingListEntry listEntry = new ShoppingListEntry(shoppingItem, shoppingQuantity);
 		
 		return listEntry;

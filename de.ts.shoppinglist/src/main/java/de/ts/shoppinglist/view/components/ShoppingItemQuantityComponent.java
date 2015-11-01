@@ -5,13 +5,17 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Locale;
 
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFormattedTextField;
+
+import de.ts.shoppinglist.model.ShoppingItemUnit;
 
 public class ShoppingItemQuantityComponent extends JComponent {
 
 	private static final long serialVersionUID = 1L;
 	private JFormattedTextField textField;
+	private JComboBox<ShoppingItemUnit> shoppingItemUnitComponent;
 	
 	public ShoppingItemQuantityComponent() {
 	
@@ -25,6 +29,7 @@ public class ShoppingItemQuantityComponent extends JComponent {
 
 	private void addComponents() {
 		add(textField);
+		add(shoppingItemUnitComponent);
 	}
 
 
@@ -36,9 +41,18 @@ public class ShoppingItemQuantityComponent extends JComponent {
 
 	private void initComponents() {
 		textField = createNumbersOnlyComponent(4);
+		shoppingItemUnitComponent = createShoppingItemUnitComponent();
 	}
 
 	
+	private JComboBox<ShoppingItemUnit> createShoppingItemUnitComponent() {
+		
+		JComboBox<ShoppingItemUnit> shoppingItemUnitComponent = new JComboBox<>(ShoppingItemUnit.values());
+		
+		return shoppingItemUnitComponent;
+	}
+
+
 	private JFormattedTextField createNumbersOnlyComponent(int length) {
 		NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.getDefault());
 		DecimalFormat decimalFormat = (DecimalFormat) numberFormat;
@@ -58,7 +72,7 @@ public class ShoppingItemQuantityComponent extends JComponent {
 		textField.setText(valueString);
 	}
 	
-	public int getShoppingItemQuantityRepresentation()
+	public int getShoppingItemQuantity()
 	{
 		String quantityTextFieldValue = textField.getText();
 		int quantity = 0;
@@ -67,6 +81,12 @@ public class ShoppingItemQuantityComponent extends JComponent {
 		
 		return quantity;
 		
+	}
+
+
+	public ShoppingItemUnit getShoppingItemUnit() {
+		
+		return (ShoppingItemUnit) shoppingItemUnitComponent.getSelectedItem();
 	}
 	
 }
