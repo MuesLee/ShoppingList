@@ -11,5 +11,7 @@ public interface UserInputHandler {
 	public void moveCurrentlySelectedEntryDownwards();
 
 	public void moveCurrentlySelectedEntryUpwards();
+
+	public void editCurrentlySelectedItem();
 	
 }

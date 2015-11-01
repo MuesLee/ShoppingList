@@ -124,6 +124,11 @@ public class ShoppingListController implements PropertyChangeListener, UserInput
 		
 	}
 
+	@Override
+	public void editCurrentlySelectedItem() {
+		new ListEditPopup(shoppingListGUI.getJList());
+	}
+
 	public static long getNextID() {
 		return ++lastUsedID;
 	}
@@ -175,7 +180,7 @@ public class ShoppingListController implements PropertyChangeListener, UserInput
 				super.mouseClicked(e);
 
 				if (e.getClickCount() == 2) {
-					new ListEditPopup(shoppingListGUI.getJList());
+					editCurrentlySelectedItem();
 				}
 			}
 		};

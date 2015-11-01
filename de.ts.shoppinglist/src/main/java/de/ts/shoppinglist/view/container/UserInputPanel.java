@@ -95,7 +95,18 @@ public class UserInputPanel extends JPanel {
 				removeItemsFromShoppingList();
 			}
 		});
-
+		// Pressing F2 will Edit the ShoppingItem
+		
+		getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_F2, 0, false),
+				"F2 pressed");
+		getActionMap().put("F2 pressed", new AbstractAction() {
+			private static final long serialVersionUID = 1L;
+			
+			@Override
+			public void actionPerformed(ActionEvent ae) {
+				editCurrentlySelectedItem();
+			}
+		});
 	}
 
 	private JPanel createButtonPanel() {
@@ -141,5 +152,9 @@ public class UserInputPanel extends JPanel {
 
 	private void removeItemsFromShoppingList() {
 		controller.removeCurrentlySelectedEntriesFromShoppingList();
+	}
+	private void editCurrentlySelectedItem() {
+	controller.editCurrentlySelectedItem();
+		
 	}
 }
