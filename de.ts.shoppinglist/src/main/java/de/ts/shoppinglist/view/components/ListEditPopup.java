@@ -23,12 +23,31 @@ public class ListEditPopup extends JPopupMenu {
 	private static final long serialVersionUID = 1L;
 	
 	private JTextField editTextField;
+	
 	private JList<ShoppingListEntry> list;
 
 	public ListEditPopup(final JList<ShoppingListEntry> list) {
 
 		this.list = list;
+		
+		configure();
 
+		initComponents();
+		
+		add(editTextField);
+		
+		int row = list.getSelectedIndex();
+		Rectangle r = list.getCellBounds(row, row);
+		setPreferredSize(new Dimension(r.width, r.height));
+		show(list, r.x, r.y);
+		
+	}
+
+	private void configure() {
+		setBorder(new EmptyBorder(0, 0, 0, 0));
+	}
+
+	private void initComponents() {
 		editTextField = new JTextField();
 		Border border = UIManager.getBorder("List.focusCellHighlightBorder");
 		editTextField.setBorder(border);
@@ -45,25 +64,11 @@ public class ListEditPopup extends JPopupMenu {
 			}
 
 		});
-
-		// Add the editor to the popup
-
-		setBorder(new EmptyBorder(0, 0, 0, 0));
-		add(editTextField);
-
-		int row = list.getSelectedIndex();
-		Rectangle r = list.getCellBounds(row, row);
-
-		setPreferredSize(new Dimension(r.width, r.height));
-		show(list, r.x, r.y);
-
-		// Prepare the text field for editing
-
+		
 		editTextField.setText(list.getSelectedValue().toString());
 		editTextField.selectAll();
 		editTextField.setHorizontalAlignment(SwingConstants.CENTER);
 		editTextField.requestFocusInWindow();
-
 	}
 
 	private void applyValueToModel(String value, DefaultListModel<ShoppingListEntry> model, int row) {
