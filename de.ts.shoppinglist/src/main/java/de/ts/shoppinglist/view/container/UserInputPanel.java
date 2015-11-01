@@ -19,6 +19,7 @@ import javax.swing.border.EtchedBorder;
 
 import de.ts.shoppinglist.controller.UserInputHandler;
 import de.ts.shoppinglist.model.ShoppingListEntry;
+import de.ts.shoppinglist.util.Messages;
 import de.ts.shoppinglist.view.components.ShoppingListEntryComponent;
 
 public class UserInputPanel extends JPanel {

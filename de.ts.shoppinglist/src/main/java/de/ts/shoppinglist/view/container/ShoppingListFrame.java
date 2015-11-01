@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 
+import de.ts.shoppinglist.util.Messages;
+
 /**
  * Extends {@link JFrame}. Adds some default configuration.
  * Built to display the ShoppingList application and all its components

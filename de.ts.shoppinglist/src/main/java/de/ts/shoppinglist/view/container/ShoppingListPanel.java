@@ -11,6 +11,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EtchedBorder;
 
 import de.ts.shoppinglist.model.ShoppingListEntry;
+import de.ts.shoppinglist.util.Messages;
 
 public class ShoppingListPanel extends JPanel implements ShoppingListGUI {
 	private static final long serialVersionUID = 1L;

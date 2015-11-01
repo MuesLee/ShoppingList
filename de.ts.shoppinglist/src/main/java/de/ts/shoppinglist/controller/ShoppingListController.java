@@ -11,22 +11,20 @@ import java.beans.PropertyChangeListener;
 import java.util.List;
 import java.util.logging.Logger;
 
-import javax.swing.DropMode;
 import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.ListSelectionModel;
 
 import de.ts.shoppinglist.model.ShoppingItem;
 import de.ts.shoppinglist.model.ShoppingItemQuantity;
 import de.ts.shoppinglist.model.ShoppingItemUnit;
 import de.ts.shoppinglist.model.ShoppingListEntry;
 import de.ts.shoppinglist.model.ShoppingListModel;
+import de.ts.shoppinglist.util.Messages;
 import de.ts.shoppinglist.view.components.ListEditPopup;
-import de.ts.shoppinglist.view.components.ListTransferHandler;
-import de.ts.shoppinglist.view.components.ShoppingListEntryRenderer;
+import de.ts.shoppinglist.view.components.ShoppingList;
 import de.ts.shoppinglist.view.container.ShoppingListFrame;
 import de.ts.shoppinglist.view.container.ShoppingListGUI;
 import de.ts.shoppinglist.view.container.ShoppingListPanel;
@@ -159,13 +157,8 @@ public class ShoppingListController implements PropertyChangeListener, UserInput
 		shoppingListModel = new ShoppingListModel();
 		shoppingListModel.addPropertyChangeListener(this);
 
-		JList<ShoppingListEntry> shoppingList = new JList<ShoppingListEntry>(shoppingListModel);
-		shoppingList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		shoppingList.setLayoutOrientation(JList.VERTICAL);
-		shoppingList.setCellRenderer(new ShoppingListEntryRenderer());
-		shoppingList.setDragEnabled(true);
-		shoppingList.setDropMode(DropMode.INSERT);
-		shoppingList.setTransferHandler(new ListTransferHandler());
+		JList<ShoppingListEntry> shoppingList = new ShoppingList(shoppingListModel);
+	
 		shoppingList.addMouseListener(createMouseListener());
 		
 		// TEST ENTRIES
@@ -178,7 +171,7 @@ public class ShoppingListController implements PropertyChangeListener, UserInput
 		ShoppingListEntry shoppingListEntry3 = new ShoppingListEntry(new ShoppingItem("Parmesan"), //$NON-NLS-1$
 				new ShoppingItemQuantity(2123, ShoppingItemUnit.GRAMM));
 		shoppingListModel.addElement(shoppingListEntry3);
-
+		
 		return shoppingList;
 	}
 
