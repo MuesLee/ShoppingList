@@ -20,10 +20,13 @@ public class ShoppingItemQuantity{
 		this.quantity = quantity;
 	}
 
+
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((itemUnit == null) ? 0 : itemUnit.hashCode());
 		result = prime * result + quantity;
 		return result;
 	}
@@ -37,11 +40,13 @@ public class ShoppingItemQuantity{
 		if (getClass() != obj.getClass())
 			return false;
 		ShoppingItemQuantity other = (ShoppingItemQuantity) obj;
+		if (itemUnit != other.itemUnit)
+			return false;
 		if (quantity != other.quantity)
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
 		return Integer.toString(quantity) + itemUnit.toString();
