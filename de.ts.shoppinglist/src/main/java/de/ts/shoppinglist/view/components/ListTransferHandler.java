@@ -52,8 +52,7 @@ public class ListTransferHandler extends TransferHandler {
 			for (ShoppingListEntry shoppingListEntry : values) {
 				shoppingListEntryIds.add(shoppingListEntry.getId());
 			}
-			
-			
+
 			StringBuffer buff = new StringBuffer();
 
 			for (ShoppingListEntry shoppingListEntry : values) {
@@ -124,15 +123,13 @@ public class ListTransferHandler extends TransferHandler {
 
 			if (insert) {
 
-				listModel.add(index + i, parsedShoppingListEntry);
-			} else {
-				// If the items go beyond the end of the current
-				// list, add them in.
+				try {
+					listModel.add(index, parsedShoppingListEntry);
 
-				if (index < listModel.getSize()) {
-					listModel.set(index + i, parsedShoppingListEntry);
-				} else {
-					listModel.add(index + i, parsedShoppingListEntry);
+				} catch (ArrayIndexOutOfBoundsException e) {
+					// If the items go beyond the end of the current
+					// list, add them in.
+					listModel.addElement(parsedShoppingListEntry);
 				}
 			}
 		}
@@ -150,12 +147,14 @@ public class ListTransferHandler extends TransferHandler {
 		try {
 			if (action == TransferHandler.MOVE) {
 
-				for (Long id: shoppingListEntryIds) {
+				for (Long id : shoppingListEntryIds) {
 					listModel.removeElementById(id);
 				}
-			
+
 			}
 		} catch (Exception e) {
+		} finally {
+			shoppingListEntryIds = new ArrayList<>();
 		}
 	}
 }
