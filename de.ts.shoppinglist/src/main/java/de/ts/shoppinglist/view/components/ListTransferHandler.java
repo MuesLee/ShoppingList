@@ -4,6 +4,7 @@ import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JComponent;
 import javax.swing.JList;
@@ -15,12 +16,7 @@ import de.ts.shoppinglist.util.ShoppingListEntryUtil;
 
 public class ListTransferHandler extends TransferHandler {
 	private static final long serialVersionUID = 1L;
-	private int[] indices = null;
-
-	@SuppressWarnings("unused")
-	private int addIndex = -1; // Location where items were added
-	@SuppressWarnings("unused")
-	private int addCount = 0; // Number of items added.
+	private List<Long> shoppingListEntryIds = new ArrayList<>();
 
 	/**
 	 * Only supports importing {@link String}
@@ -30,17 +26,17 @@ public class ListTransferHandler extends TransferHandler {
 		if (!info.isDataFlavorSupported(DataFlavor.stringFlavor)) {
 			return false;
 		}
-		
+
 		info.setShowDropLocation(true);
-		
-		JList.DropLocation dropLocation =  (JList.DropLocation)info.getDropLocation();
+
+		JList.DropLocation dropLocation = (JList.DropLocation) info.getDropLocation();
 		int dropIndex = dropLocation.getIndex();
-		
-		    // we do not support invalid columns
-		    if (dropIndex == -1 ) {
-		        return false;
-		    }
-		
+
+		// we do not support invalid columns
+		if (dropIndex == -1) {
+			return false;
+		}
+
 		return true;
 	}
 
@@ -53,7 +49,10 @@ public class ListTransferHandler extends TransferHandler {
 		JList<ShoppingListEntry> list = (JList<ShoppingListEntry>) c;
 		try {
 			ArrayList<ShoppingListEntry> values = (ArrayList<ShoppingListEntry>) list.getSelectedValuesList();
-			indices = list.getSelectedIndices();
+			for (ShoppingListEntry shoppingListEntry : values) {
+				shoppingListEntryIds.add(shoppingListEntry.getId());
+			}
+			
 			
 			StringBuffer buff = new StringBuffer();
 
@@ -106,34 +105,34 @@ public class ListTransferHandler extends TransferHandler {
 		// Split data by new Line
 		String[] values = data.split("\n");
 
-		addIndex = index;
-		addCount = values.length;
-
 		// Perform the actual import.
 		for (int i = 0; i < values.length; i++) {
 
 			String value = values[i];
 			ShoppingListEntry parsedShoppingListEntry;
-			
-			//Try to parse the String to a ShoppingListEntry
+
+			// Try to parse the String to a ShoppingListEntry
 			try {
 				parsedShoppingListEntry = ShoppingListEntryUtil.parseStringToShoppingListEntry(value);
-				
+
 			} catch (Exception e) {
 				return false;
 			}
 
+			// Insert all Drops under the Drop Location
+			index = index + i;
+
 			if (insert) {
 
-				listModel.add(index++, parsedShoppingListEntry);
+				listModel.add(index + i, parsedShoppingListEntry);
 			} else {
 				// If the items go beyond the end of the current
 				// list, add them in.
-				
+
 				if (index < listModel.getSize()) {
-					listModel.set(index++, parsedShoppingListEntry);
+					listModel.set(index + i, parsedShoppingListEntry);
 				} else {
-					listModel.add(index++, parsedShoppingListEntry);
+					listModel.add(index + i, parsedShoppingListEntry);
 				}
 			}
 		}
@@ -148,15 +147,15 @@ public class ListTransferHandler extends TransferHandler {
 		JList<ShoppingListEntry> source = (JList<ShoppingListEntry>) c;
 		ShoppingListModel listModel = (ShoppingListModel) source.getModel();
 
-		if (action == TransferHandler.MOVE) {
-			for (int i = indices.length - 1; i >= 0; i--) {
-				int indexToBeRemoved = indices[i];
-				listModel.remove(indexToBeRemoved);
-			}
-		}
+		try {
+			if (action == TransferHandler.MOVE) {
 
-		indices = null;
-		addCount = 0;
-		addIndex = -1;
+				for (Long id: shoppingListEntryIds) {
+					listModel.removeElementById(id);
+				}
+			
+			}
+		} catch (Exception e) {
+		}
 	}
 }
