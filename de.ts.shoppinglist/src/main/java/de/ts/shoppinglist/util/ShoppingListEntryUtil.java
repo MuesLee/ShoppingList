@@ -1,6 +1,8 @@
 package de.ts.shoppinglist.util;
 
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import de.ts.shoppinglist.model.ShoppingItem;
@@ -60,6 +62,26 @@ public class ShoppingListEntryUtil {
 
 		log.warning("ShoppingListEntry parsing failed for: " + value);
 		throw new ParseException(value, 0);
-
+	}
+	
+	/**
+	 * Parsing the data to a {@link List} of {@link ShoppingListEntry}.
+	 * Expecting one {@link ShoppingListEntry} per line.
+	 * 
+	 * @param data
+	 * @return
+	 * @throws ParseException if the data could not be parsed
+	 */
+	public static List<ShoppingListEntry> parseStringToShoppingListEntries(String data) throws ParseException
+	{
+		List<ShoppingListEntry> shoppingListEntries = new ArrayList<>(); 
+		
+		String[] split = data.split("\n");
+		for (String string : split) {
+			ShoppingListEntry parseStringToShoppingListEntry = parseStringToShoppingListEntry(string);
+			shoppingListEntries.add(parseStringToShoppingListEntry);
+		}
+		return shoppingListEntries;
+		
 	}
 }
